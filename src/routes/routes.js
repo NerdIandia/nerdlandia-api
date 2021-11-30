@@ -1,18 +1,15 @@
 const express = require("express");
 const router = express.Router();
+
 const UserController = require("../controllers/UserController")
-
-router.get("/", (req,res) => {
-    return res.json({
-        batata: "roxa",
-        nome: "daniel",
-    });
-});
-
-let users = []
+const AuthController = require("../controllers/AuthController");
+const authMiddleware = require("../middlewares/AuthMiddleware");
 
 router.get("/users", UserController.index);
+router.get("/users/:id", UserController.find);
+router.patch("/users", authMiddleware, UserController.update);
 
-router.post("/users", UserController.store);
+router.post("/login", AuthController.login);
+router.post("/register", AuthController.register);
 
 module.exports = router;

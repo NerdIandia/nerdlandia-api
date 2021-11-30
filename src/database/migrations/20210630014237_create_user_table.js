@@ -11,6 +11,7 @@ exports.up = function(knex) {
         table.text("cpf").unique().notNullable();
     });
     
+
 };
 
 exports.down = function(knex) {
